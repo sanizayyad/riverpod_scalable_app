@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_scalable_app/features/auth/data/firebase_auth_repository.dart';
-import 'package:riverpod_scalable_app/providers/isAuthenticated_provider.dart';
 
 class AuthState {
   final bool isLoading;
@@ -34,7 +33,6 @@ class AuthNotifier extends Notifier<AuthState> {
     try {
       final user = await _repository.login(email, password);
       state = state.copyWith(isLoading: false, userId: user?.uid);
-      ref.read(isAuthenticatedProvider.notifier).state = true;
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
     }
@@ -43,6 +41,5 @@ class AuthNotifier extends Notifier<AuthState> {
   Future<void> logout() async {
     await _repository.logout();
     state = AuthState();
-    ref.read(isAuthenticatedProvider.notifier).state = false;
   }
 }
