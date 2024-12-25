@@ -1,0 +1,8 @@
+{
+  "appTitle": "Scalable App",
+  "login": "Login",
+  "notes": "Notes",
+  "@appTitle": {
+    "description": "Title of the application"
+  }
+}
